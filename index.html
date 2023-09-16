@@ -18,10 +18,8 @@
     let tg = window.Telegram.WebApp;
     let hd = document.getElementById("headtest");
     let btn = document.getElementById("testbtn");
-    btn.addEventListener("click",() =>
-    {
-      hd.value = tg.initDataUnsafe.username;
-    });
+    hd.value = tg.initDataUnsafe.username;
+  
 
   </script>
 </body>
