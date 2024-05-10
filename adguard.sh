@@ -60,7 +60,7 @@ if (( $(df /boot | awk 'NR==2{gsub("%","",$5); print $5}') > 80 )); then
   read -r -p "Warning: Storage is dangerously low, continue anyway? <y/N> " prompt
   [[ ${prompt,,} =~ ^(y|yes)$ ]] || exit
 fi
-wget -qL https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz
+wget -qL https://github.com/youArgument/testweb/blob/5931682f34b61c331ce191a0d2a584197708d871/AdGuardHome_linux_amd64.tar.gz
 msg_info "Stopping AdguardHome"
 systemctl stop AdGuardHome
 msg_ok "Stopped AdguardHome"
