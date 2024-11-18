@@ -224,34 +224,23 @@
             'device_id': Lampa.Storage.get('kinopoisk_deviceid', '')
         }
         network.silent('https://oauth.yandex.ru/device/code', function(data) { // on device code success
-            if (data.user_code && data.device_code) {
-                Lampa.Utils.copyTextToClipboard(data.user_code, () => {});
-            
-                // Создаем элементы интерфейса
-                let container = $('<div class="auth-container"></div>');
-                let instructions = $('<div class="auth-instructions">Перейдите по ссылке <a href="https://ya.ru/device" target="_blank">https://ya.ru/device</a> на любом устройстве и введите код:<br><br><b>' + data.user_code + '</b><br><br></div>');
-                let backButton = $('<div class="auth-back selector" style="text-align: center;">Назад</div>');
-                let doneButton = $('<div class="auth-done selector" style="text-align: center;">Готово</div>');
-            
-                // Добавляем элементы в контейнер
-                container.append(instructions);
-                container.append(backButton);
-                container.append(doneButton);
-            
-                // Добавляем контейнер в DOM
-                $('.menu').append(container);
-            
-                // Обработчик для кнопки "Назад"
-                backButton.on('click', function () {
-                    container.remove(); // Удаляем интерфейс
-                    Lampa.Noty.show('Авторизация отменена'); // Уведомляем пользователя
-                });
-            
-                // Обработчик для кнопки "Готово"
-                doneButton.on('click', function () {
-                    getToken(data.device_code, false); // Получаем токен
-                    container.remove(); // Удаляем интерфейс
-                });
+            if(data.user_code && data.device_code) {
+                Lampa.Utils.copyTextToClipboard(data.user_code, ()=>{});
+                
+                // ask user to authorize
+                let modal = $('<div><div class="about">Перейдите по ссылке на любом устройстве и введите код<br><br><b>' + data.user_code + '</b><br><br></div><br><div class="broadcast__device selector" style="textalign: center">Готово</div></div>')
+                
+                Lampa.Modal.open({
+                    title: 'Авторизация',
+                    html: modal,
+                    align: 'center',
+                    onBack: () => {
+                        Lampa.Modal.close()
+                    },
+                    onSelect: () => { // on button click
+                        getToken(data.device_code, false);
+                    }
+                })
             } else {
                 Lampa.Noty.show('Не удалось получить user_code');
                 console.log('Kinopoisk', 'Failed to get user_code', data.error);
