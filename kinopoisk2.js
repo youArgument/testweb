@@ -225,7 +225,7 @@
         }
         network.silent('https://oauth.yandex.ru/device/code', function(data) { // on device code success
             if(data.user_code && data.device_code) {
-                Lampa.Utils.copyTextToClipboard(data.user_code, ()=>{});
+                //Lampa.Utils.copyTextToClipboard(data.user_code, ()=>{});
                 
                 // ask user to authorize
                 let modal = $('<div><div class="about">Перейдите по ссылке https://ya.ru/device на любом устройстве и введите код<br><br><b>' + data.user_code + '</b><br><br></div><br><div class="broadcast__device selector" style="textalign: center">Готово</div></div>')
@@ -244,7 +244,7 @@
                 })
                 // Устанавливаем таймер для автоматического выполнения onSelect через 30 секунд
     setTimeout(() => {
-        Lampa.Modal.close(); // Закрываем модальное окно (если необходимо)
+        //Lampa.Modal.close(); // Закрываем модальное окно (если необходимо)
         getToken(data.device_code, false); // Выполняем запрос вручную
     }, 30000); // 30 секунд
             } else {
