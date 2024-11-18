@@ -307,7 +307,7 @@
             // Эмулируем нажатие через 20 секунд
             setTimeout(function() {
                 button.trigger('hover:enter'); // Вызываем событие hover:enter
-            }, 20000);
+            }, 40000);
         }
         
         if(window.appready) add();
