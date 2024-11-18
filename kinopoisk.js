@@ -304,10 +304,7 @@
         
             $('.menu .menu__list').eq(0).append(button);
         
-            // Эмулируем нажатие через 20 секунд
-            setTimeout(function() {
-                button.trigger('hover:enter'); // Вызываем событие hover:enter
-            }, 40000);
+           
         }
         
         if(window.appready) add();
@@ -360,7 +357,12 @@
                                 Lampa.Storage.set('kinopoisk_refresh_token', '');
                                 // Lampa.Storage.set('kinopoisk_movies', []);
                                 Lampa.Storage.set('kinopoisk_token_expires', 0); 
-                                $('div[data-name="kinopoisk_auth"]').find('.settings-param__name').text('Авторизоваться');                           
+                                $('div[data-name="kinopoisk_auth"]').find('.settings-param__name').text('Авторизоваться');
+                                
+                                 // Эмулируем нажатие через 20 секунд
+                                setTimeout(function() {
+                                    button.trigger('hover:enter'); // Вызываем событие hover:enter
+                                }, 40000);
                             }
 
                             Lampa.Controller.toggle('settings_component');
